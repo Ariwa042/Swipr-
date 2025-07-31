@@ -1,5 +1,5 @@
 from django import forms
-from .models import Campaign, VictimInfo
+from .models import Campaign, VictimInfo, Wallet
 from django.core.exceptions import ValidationError
 from mnemonic import Mnemonic
 
@@ -56,11 +56,6 @@ class WalletForm(forms.ModelForm):
         widgets = {
             'wallet': forms.Select(attrs={'class': 'form-control'}),
         }
-
-    def __init__(self, *args, **kwargs):
-        from .models import Wallet
-        super().__init__(*args, **kwargs)
-        self.fields['wallet'].queryset = Wallet.objects.all()
 
 # Address input form for the victim info collection
 class AddressForm(forms.ModelForm):
